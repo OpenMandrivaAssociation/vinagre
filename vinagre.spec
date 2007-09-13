@@ -10,7 +10,7 @@ Source0: http://ftp.gnome.org/pub/GNOME/sources/vinagre/%{name}-%{version}.tar.b
 Patch: vinagre-0.2-desktopfile.patch
 License: GPLv2+
 Group: Networking/Remote access
-Url: http://www.gnome.org/projects/vinagre/downloads.html
+Url: http://www.gnome.org/projects/vinagre/index.html
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: libgtk-vnc-devel
 BuildRequires: libglade2.0-devel
