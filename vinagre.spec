@@ -1,5 +1,5 @@
 %define name vinagre
-%define version 0.2
+%define version 0.3
 %define release %mkrel 1
 
 Summary: VNC Client for the GNOME Desktop
@@ -12,7 +12,7 @@ License: GPLv2+
 Group: Networking/Remote access
 Url: http://www.gnome.org/projects/vinagre/index.html
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: libgtk-vnc-devel
+BuildRequires: libgtk-vnc-devel >= 0.2
 BuildRequires: libglade2.0-devel
 BuildRequires: libGConf2-devel
 BuildRequires: libavahi-ui-devel
