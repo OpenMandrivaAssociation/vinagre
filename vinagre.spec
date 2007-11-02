@@ -1,6 +1,6 @@
 %define name vinagre
 %define version 0.3
-%define release %mkrel 1
+%define release %mkrel 2
 
 Summary: VNC Client for the GNOME Desktop
 Name: %{name}
@@ -33,7 +33,7 @@ Features:
 %patch -p1
 
 %build
-%configure2_5x
+%configure2_5x --enable-avahi
 %make
 
 %install
