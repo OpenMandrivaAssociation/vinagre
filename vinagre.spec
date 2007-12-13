@@ -1,22 +1,25 @@
 %define name vinagre
-%define version 0.3
-%define release %mkrel 2
+%define version 0.4
+%define release %mkrel 1
 
 Summary: VNC Client for the GNOME Desktop
 Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: http://ftp.gnome.org/pub/GNOME/sources/vinagre/%{name}-%{version}.tar.bz2
-Patch: vinagre-0.2-desktopfile.patch
 License: GPLv2+
 Group: Networking/Remote access
 Url: http://www.gnome.org/projects/vinagre/index.html
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: libgtk-vnc-devel >= 0.2
+BuildRequires: libgtk-vnc-devel >= 0.3
 BuildRequires: libglade2.0-devel
 BuildRequires: libGConf2-devel
+BuildRequires: libgnome-vfs2-devel
 BuildRequires: libavahi-ui-devel
 BuildRequires: perl-XML-Parser
+BuildRequires: desktop-file-utils
+Requires(post):shared-mime-info
+Requires(postun):shared-mime-info
 
 %description
 Vinagre is a VNC Client for the GNOME Desktop.
@@ -30,7 +33,6 @@ Features:
 
 %prep
 %setup -q
-%patch -p1
 
 %build
 %configure2_5x --enable-avahi
@@ -40,6 +42,21 @@ Features:
 rm -rf $RPM_BUILD_ROOT %name.lang
 %makeinstall_std
 %find_lang %name
+desktop-file-install --vendor="" \
+  --add-category="RemoteAccess" \
+  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/*
+
+%post
+%update_menus
+%update_desktop_database
+%update_mime_database
+%update_icon_cache hicolor
+
+%postun
+%clean_menus
+%clean_desktop_database
+%clean_mime_database
+%clean_icon_cache hicolor
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -50,3 +67,5 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/*
 %_datadir/applications/*
 %_datadir/%name
+%_datadir/icons/hicolor/*/*/*.*
+%_datadir/mime/packages/vinagre-mime.xml
