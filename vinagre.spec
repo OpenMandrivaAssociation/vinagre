@@ -15,6 +15,7 @@ BuildRequires: libgtk-vnc-devel >= 0.3
 BuildRequires: libglade2.0-devel
 BuildRequires: libGConf2-devel
 BuildRequires: libgnome-vfs2-devel
+BuildRequires: libgnome-keyring-devel
 BuildRequires: libavahi-ui-devel
 BuildRequires: perl-XML-Parser
 BuildRequires: desktop-file-utils
