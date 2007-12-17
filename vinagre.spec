@@ -10,7 +10,6 @@ Source0: http://ftp.gnome.org/pub/GNOME/sources/vinagre/%{name}-%{version}.tar.b
 License: GPLv2+
 Group: Networking/Remote access
 Url: http://www.gnome.org/projects/vinagre/index.html
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: libgtk-vnc-devel >= 0.3
 BuildRequires: libglade2.0-devel
 BuildRequires: libGConf2-devel
