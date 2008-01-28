@@ -1,6 +1,6 @@
 %define name vinagre
-%define version 0.4
-%define release %mkrel 2
+%define version 0.4.90
+%define release %mkrel 1
 
 Summary: VNC Client for the GNOME Desktop
 Name: %{name}
@@ -42,7 +42,11 @@ Features:
 %install
 rm -rf $RPM_BUILD_ROOT %name.lang
 %makeinstall_std
-%find_lang %name
+%find_lang %name --with-gnome
+for omf in %buildroot%_datadir/omf/*/*-??.omf;do
+echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed s!%buildroot!!)" >> %name.lang
+done
+
 desktop-file-install --vendor="" \
   --add-category="RemoteAccess" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/*
@@ -68,5 +72,8 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/*
 %_datadir/applications/*
 %_datadir/%name
+%dir %_datadir/omf/vinagre
+%_datadir/omf/vinagre/vinagre-C.omf
 %_datadir/icons/hicolor/*/*/*.*
 %_datadir/mime/packages/vinagre-mime.xml
+%_mandir/man1/vinagre.1*
