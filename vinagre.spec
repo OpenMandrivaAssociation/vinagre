@@ -52,21 +52,25 @@ desktop-file-install --vendor="" \
   --add-category="RemoteAccess" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/*
 
+%if %mdkversion < 200900
 %post
 %update_menus
 %update_desktop_database
 %update_mime_database
 %update_icon_cache hicolor
 %post_install_gconf_schemas vinagre
+%endif
 
 %preun
 %preun_uninstall_gconf_schemas vinagre
 
+%if %mdkversion < 200900
 %postun
 %clean_menus
 %clean_desktop_database
 %clean_mime_database
 %clean_icon_cache hicolor
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
