@@ -17,6 +17,7 @@ BuildRequires: libGConf2-devel
 BuildRequires: libgnome-vfs2-devel
 BuildRequires: libgnome-keyring-devel
 BuildRequires: libavahi-ui-devel libavahi-gobject-devel
+BuildRequires: gnome-panel-devel
 BuildRequires: gnome-doc-utils >= 0.3.2
 BuildRequires: perl-XML-Parser
 BuildRequires: desktop-file-utils
