@@ -1,5 +1,5 @@
 %define name vinagre
-%define version 0.5.1
+%define version 2.23.4
 %define release %mkrel 1
 
 Summary: VNC Client for the GNOME Desktop
@@ -16,7 +16,7 @@ BuildRequires: libglade2.0-devel
 BuildRequires: libGConf2-devel
 BuildRequires: libgnome-vfs2-devel
 BuildRequires: libgnome-keyring-devel
-BuildRequires: libavahi-ui-devel
+BuildRequires: libavahi-ui-devel libavahi-gobject-devel
 BuildRequires: gnome-doc-utils >= 0.3.2
 BuildRequires: perl-XML-Parser
 BuildRequires: desktop-file-utils
@@ -87,3 +87,6 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/icons/hicolor/*/*/*.*
 %_datadir/mime/packages/vinagre-mime.xml
 %_mandir/man1/vinagre.1*
+%_libdir/bonobo/servers/GNOME_VinagreApplet.server
+%_libexecdir/vinagre-applet
+
