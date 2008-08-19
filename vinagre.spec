@@ -1,5 +1,5 @@
 %define name vinagre
-%define version 2.23.4
+%define version 2.23.90
 %define release %mkrel 1
 
 Summary: VNC Client for the GNOME Desktop
@@ -19,7 +19,7 @@ BuildRequires: libgnome-keyring-devel
 BuildRequires: libavahi-ui-devel libavahi-gobject-devel
 BuildRequires: gnome-panel-devel
 BuildRequires: gnome-doc-utils >= 0.3.2
-BuildRequires: perl-XML-Parser
+BuildRequires: intltool
 BuildRequires: desktop-file-utils
 Requires(post):shared-mime-info
 Requires(postun):shared-mime-info
