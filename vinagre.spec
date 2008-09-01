@@ -1,5 +1,5 @@
 %define name vinagre
-%define version 2.23.90
+%define version 2.23.91
 %define release %mkrel 1
 
 Summary: VNC Client for the GNOME Desktop
