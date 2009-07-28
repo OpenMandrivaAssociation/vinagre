@@ -1,5 +1,5 @@
 %define name vinagre
-%define version 2.26.2
+%define version 2.27.5
 %define release %mkrel 1
 
 Summary: VNC Client for the GNOME Desktop
@@ -18,6 +18,7 @@ BuildRequires: libgnome-vfs2-devel
 BuildRequires: libgnome-keyring-devel
 BuildRequires: libavahi-ui-devel libavahi-gobject-devel
 BuildRequires: gnome-panel-devel
+BuildRequires: libtelepathy-glib-devel
 BuildRequires: gnome-doc-utils >= 0.3.2
 BuildRequires: intltool
 BuildRequires: desktop-file-utils
@@ -34,12 +35,29 @@ Features:
   GNOME Keyring (well, this is not yet implemented)
 * It's still in alpha stage (but usable), so, bugs are around
 
+%package devel
+Summary: VNC Client for the GNOME Desktop - development files
+Group: Development/C
+Requires: %name = %version-%release
+
+%description devel
+Vinagre is a VNC Client for the GNOME Desktop.
+Features:
+* You can connect to several machines at the same time, we like tabs
+* You can keep track of your most used connections, we like favorites
+* You can browse your network for VNC servers, we like avahi
+* You don't need to supply the password on every connection, we like
+  GNOME Keyring (well, this is not yet implemented)
+* It's still in alpha stage (but usable), so, bugs are around
+
+Install this package if you want to build plugins for %name.
+
 %prep
 %setup -q
 
 %build
 %configure2_5x --enable-avahi
-%make
+%make LIBS="-lavahi-gobject -lavahi-ui"
 
 %install
 rm -rf $RPM_BUILD_ROOT %name.lang
@@ -52,6 +70,8 @@ done
 desktop-file-install --vendor="" \
   --add-category="RemoteAccess" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/*
+
+rm -f %buildroot%_libdir/%name-1/plugin*/*.a
 
 %if %mdkversion < 200900
 %post
@@ -86,8 +106,20 @@ rm -rf $RPM_BUILD_ROOT
 %dir %_datadir/omf/vinagre
 %_datadir/omf/vinagre/vinagre-C.omf
 %_datadir/icons/hicolor/*/*/*.*
+%_datadir/icons/vinagre-plugin.png
 %_datadir/mime/packages/vinagre-mime.xml
+%_datadir/dbus-1/services/org.gnome.Empathy.StreamTubeHandler.x_vnc.service
 %_mandir/man1/vinagre.1*
 %_libdir/bonobo/servers/GNOME_VinagreApplet.server
 %_libexecdir/vinagre-applet
+%_libdir/%name-1/plugin-loaders/libcloader.so
+%_libdir/%name-1/plugin-loaders/libcloader.la
+%_libdir/%name-1/plugins/libvnc.so
+%_libdir/%name-1/plugins/libvnc.la
+%_libdir/%name-1/plugins/vnc.vinagre-plugin
 
+%files devel
+%defattr(-,root,root)
+%doc ChangeLog
+%_includedir/%name-1.0
+%_libdir/pkgconfig/%name-1.0.pc
