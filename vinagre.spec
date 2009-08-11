@@ -1,5 +1,5 @@
 %define name vinagre
-%define version 2.27.5
+%define version 2.27.90
 %define release %mkrel 1
 
 Summary: VNC Client for the GNOME Desktop
@@ -106,9 +106,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %_datadir/omf/vinagre
 %_datadir/omf/vinagre/vinagre-C.omf
 %_datadir/icons/hicolor/*/*/*.*
-%_datadir/icons/vinagre-plugin.png
 %_datadir/mime/packages/vinagre-mime.xml
-%_datadir/dbus-1/services/org.gnome.Empathy.StreamTubeHandler.x_vnc.service
+#%_datadir/dbus-1/services/org.gnome.Empathy.StreamTubeHandler.x_vnc.service
 %_mandir/man1/vinagre.1*
 %_libdir/bonobo/servers/GNOME_VinagreApplet.server
 %_libexecdir/vinagre-applet
