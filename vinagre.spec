@@ -107,7 +107,7 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/omf/vinagre/vinagre-C.omf
 %_datadir/icons/hicolor/*/*/*.*
 %_datadir/mime/packages/vinagre-mime.xml
-#%_datadir/dbus-1/services/org.gnome.Empathy.StreamTubeHandler.x_vnc.service
+%_datadir/dbus-1/services/org.gnome.Empathy.StreamTubeHandler.rfb.service
 %_mandir/man1/vinagre.1*
 %_libdir/bonobo/servers/GNOME_VinagreApplet.server
 %_libexecdir/vinagre-applet
