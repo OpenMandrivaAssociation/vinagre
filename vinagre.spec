@@ -12,9 +12,9 @@ Group: Networking/Remote access
 Url: http://www.gnome.org/projects/vinagre/index.html
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: libgtk-vnc-devel >= 0.3.3
-BuildRequires: libglade2.0-devel
+#gw still needed by libpanel-applet-2.la:
+BuildRequires: libglade2.0-devel libgnome-vfs2-devel
 BuildRequires: libGConf2-devel
-BuildRequires: libgnome-vfs2-devel
 BuildRequires: libgnome-keyring-devel
 BuildRequires: libavahi-ui-devel libavahi-gobject-devel
 BuildRequires: gnome-panel-devel
