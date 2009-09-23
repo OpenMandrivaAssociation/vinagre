@@ -22,6 +22,7 @@ BuildRequires: libtelepathy-glib-devel
 BuildRequires: gnome-doc-utils >= 0.3.2
 BuildRequires: intltool
 BuildRequires: desktop-file-utils
+BuildRequires: vte-devel
 Requires(post):shared-mime-info
 Requires(postun):shared-mime-info
 
