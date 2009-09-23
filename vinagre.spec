@@ -1,6 +1,6 @@
 %define name vinagre
 %define version 2.28.0.1
-%define release %mkrel 1
+%define release %mkrel 2
 
 Summary: VNC Client for the GNOME Desktop
 Name: %{name}
@@ -27,13 +27,11 @@ Requires(postun):shared-mime-info
 
 %description
 Vinagre is a VNC Client for the GNOME Desktop.
-Features:
-* You can connect to several machines at the same time, we like tabs
-* You can keep track of your most used connections, we like favorites
-* You can browse your network for VNC servers, we like avahi
-* You don't need to supply the password on every connection, we like
-  GNOME Keyring (well, this is not yet implemented)
-* It's still in alpha stage (but usable), so, bugs are around
+
+With Vinagre you can have several connections open simultaneously, bookmark
+your servers thanks to the Favorites support, store the passwords in the
+GNOME keyring, and browse the network to look for VNC servers.
+
 
 %package devel
 Summary: VNC Client for the GNOME Desktop - development files
@@ -42,13 +40,6 @@ Requires: %name = %version-%release
 
 %description devel
 Vinagre is a VNC Client for the GNOME Desktop.
-Features:
-* You can connect to several machines at the same time, we like tabs
-* You can keep track of your most used connections, we like favorites
-* You can browse your network for VNC servers, we like avahi
-* You don't need to supply the password on every connection, we like
-  GNOME Keyring (well, this is not yet implemented)
-* It's still in alpha stage (but usable), so, bugs are around
 
 Install this package if you want to build plugins for %name.
 
@@ -56,7 +47,7 @@ Install this package if you want to build plugins for %name.
 %setup -q
 
 %build
-%configure2_5x --enable-avahi
+%configure2_5x --enable-avahi --enable-telepathy --enable-ssh --disable-static
 %make LIBS="-lavahi-gobject -lavahi-ui"
 
 %install
@@ -71,7 +62,7 @@ desktop-file-install --vendor="" \
   --add-category="RemoteAccess" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/*
 
-rm -f %buildroot%_libdir/%name-1/plugin*/*.a
+rm -f %buildroot%_libdir/%name-1/plugin*/*.la
 
 %if %mdkversion < 200900
 %post
@@ -112,10 +103,8 @@ rm -rf $RPM_BUILD_ROOT
 %_libdir/bonobo/servers/GNOME_VinagreApplet.server
 %_libexecdir/vinagre-applet
 %_libdir/%name-1/plugin-loaders/libcloader.so
-%_libdir/%name-1/plugin-loaders/libcloader.la
-%_libdir/%name-1/plugins/libvnc.so
-%_libdir/%name-1/plugins/libvnc.la
-%_libdir/%name-1/plugins/vnc.vinagre-plugin
+%_libdir/%name-1/plugins/*.so
+%_libdir/%name-1/plugins/*.vinagre-plugin
 
 %files devel
 %defattr(-,root,root)
