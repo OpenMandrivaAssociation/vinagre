@@ -1,5 +1,5 @@
 %define name vinagre
-%define version 2.28.1
+%define version 2.29.1
 %define release %mkrel 1
 
 Summary: VNC Client for the GNOME Desktop
@@ -11,7 +11,7 @@ License: GPLv2+
 Group: Networking/Remote access
 Url: http://www.gnome.org/projects/vinagre/index.html
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: libgtk-vnc-devel >= 0.3.3
+BuildRequires: libgtk-vnc-devel >= 0.3.10
 #gw still needed by libpanel-applet-2.la:
 BuildRequires: libglade2.0-devel libgnome-vfs2-devel
 BuildRequires: libGConf2-devel
@@ -95,6 +95,9 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/*
 %_datadir/applications/*
 %_datadir/%name
+%dir %_datadir/%name-1/
+%dir %_datadir/%name-1/plugins/
+%_datadir/%name-1/plugins/vnc/
 %dir %_datadir/omf/vinagre
 %_datadir/omf/vinagre/vinagre-C.omf
 %_datadir/icons/hicolor/*/*/*.*
@@ -103,6 +106,9 @@ rm -rf $RPM_BUILD_ROOT
 %_mandir/man1/vinagre.1*
 %_libdir/bonobo/servers/GNOME_VinagreApplet.server
 %_libexecdir/vinagre-applet
+%dir %_libdir/%name-1/
+%dir %_libdir/%name-1/plugin-loaders
+%dir %_libdir/%name-1/plugins/
 %_libdir/%name-1/plugin-loaders/libcloader.so
 %_libdir/%name-1/plugins/*.so
 %_libdir/%name-1/plugins/*.vinagre-plugin
