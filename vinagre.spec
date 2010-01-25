@@ -98,8 +98,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %_datadir/%name-1/
 %dir %_datadir/%name-1/plugins/
 %_datadir/%name-1/plugins/vnc/
-#%dir %_datadir/omf/vinagre
-#%_datadir/omf/vinagre/vinagre-C.omf
+%dir %_datadir/omf/vinagre
+%_datadir/omf/vinagre/vinagre-C.omf
 %_datadir/icons/hicolor/*/*/*.*
 %_datadir/mime/packages/vinagre-mime.xml
 %_datadir/dbus-1/services/org.freedesktop.Telepathy.Client.Vinagre.service
