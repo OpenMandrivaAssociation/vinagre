@@ -1,5 +1,5 @@
 %define name vinagre
-%define version 2.29.1
+%define version 2.29.6
 %define release %mkrel 1
 
 Summary: VNC Client for the GNOME Desktop
@@ -55,9 +55,9 @@ Install this package if you want to build plugins for %name.
 rm -rf $RPM_BUILD_ROOT %name.lang
 %makeinstall_std
 %find_lang %name --with-gnome
-for omf in %buildroot%_datadir/omf/*/*-??*.omf;do
-echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed s!%buildroot!!)" >> %name.lang
-done
+#for omf in %buildroot%_datadir/omf/*/*-??*.omf;do
+#echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed s!%buildroot!!)" >> %name.lang
+#done
 
 desktop-file-install --vendor="" \
   --add-category="RemoteAccess" \
@@ -98,11 +98,12 @@ rm -rf $RPM_BUILD_ROOT
 %dir %_datadir/%name-1/
 %dir %_datadir/%name-1/plugins/
 %_datadir/%name-1/plugins/vnc/
-%dir %_datadir/omf/vinagre
-%_datadir/omf/vinagre/vinagre-C.omf
+#%dir %_datadir/omf/vinagre
+#%_datadir/omf/vinagre/vinagre-C.omf
 %_datadir/icons/hicolor/*/*/*.*
 %_datadir/mime/packages/vinagre-mime.xml
-%_datadir/dbus-1/services/org.gnome.Empathy.StreamTubeHandler.rfb.service
+%_datadir/dbus-1/services/org.freedesktop.Telepathy.Client.Vinagre.service
+%_datadir/telepathy/clients/Vinagre.client
 %_mandir/man1/vinagre.1*
 %_libdir/bonobo/servers/GNOME_VinagreApplet.server
 %_libexecdir/vinagre-applet
