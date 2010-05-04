@@ -1,5 +1,5 @@
 %define name vinagre
-%define version 2.30.0
+%define version 2.30.1
 %define release %mkrel 1
 
 Summary: VNC Client for the GNOME Desktop
@@ -49,7 +49,7 @@ Install this package if you want to build plugins for %name.
 
 %build
 %configure2_5x --enable-avahi --enable-telepathy --enable-ssh --disable-static
-%make LIBS="-lavahi-gobject -lavahi-ui"
+%make
 
 %install
 rm -rf $RPM_BUILD_ROOT %name.lang
