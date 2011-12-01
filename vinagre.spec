@@ -52,7 +52,7 @@ Install this package if you want to build plugins for %name.
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT %name.lang
+rm -rf %{buildroot} %name.lang
 %makeinstall_std
 %find_lang %name --with-gnome
 for omf in %buildroot%_datadir/omf/*/*-??*.omf;do
@@ -61,7 +61,7 @@ done
 
 desktop-file-install --vendor="" \
   --add-category="RemoteAccess" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/*
+  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*
 
 rm -f %buildroot%_libdir/%name-1/plugin*/*.la
 
@@ -86,7 +86,7 @@ rm -f %buildroot%_libdir/%name-1/plugin*/*.la
 %endif
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files -f %name.lang
 %defattr(-,root,root)
