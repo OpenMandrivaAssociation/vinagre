@@ -1,28 +1,35 @@
-%define name vinagre
-%define version 2.30.3
-%define release %mkrel 2
+%define api 3.0
 
 Summary: VNC Client for the GNOME Desktop
-Name: %{name}
-Version: %{version}
-Release: %{release}
-Source0: http://ftp.gnome.org/pub/GNOME/sources/vinagre/%{name}-%{version}.tar.bz2
+Name: vinagre
+Version: 3.2.2
+Release: 1
 License: GPLv2+
 Group: Networking/Remote access
 Url: http://www.gnome.org/projects/vinagre/index.html
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: libgtk-vnc-devel >= 0.3.10
-#gw still needed by libpanel-applet-2.la:
-BuildRequires: libglade2.0-devel libgnome-vfs2-devel
-BuildRequires: libGConf2-devel
-BuildRequires: libgnome-keyring-devel
-BuildRequires: libavahi-ui-devel libavahi-gobject-devel
-BuildRequires: gnome-panel-devel
-BuildRequires: libtelepathy-glib-devel
-BuildRequires: gnome-doc-utils >= 0.3.2
-BuildRequires: intltool
-BuildRequires: desktop-file-utils
-BuildRequires: vte-devel
+Source0: http://ftp.gnome.org/pub/GNOME/sources/vinagre/%{name}-%{version}.tar.xz
+Patch0:	vinagre-3.1.3-modules.patch
+
+BuildRequires:	desktop-file-utils
+BuildRequires:	gnome-common
+BuildRequires:	gnome-doc-utils
+BuildRequires:	intltool
+BuildRequires:	pkgconfig(avahi-ui-gtk3)
+BuildRequires:	pkgconfig(avahi-gobject)
+BuildRequires:	pkgconfig(avahi-ui)
+BuildRequires:	pkgconfig(glib-2.0)
+BuildRequires:	pkgconfig(gnome-icon-theme)
+BuildRequires:	pkgconfig(gnome-keyring-1)
+BuildRequires:	pkgconfig(gobject-introspection-1.0)
+BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:	pkgconfig(gtk-vnc-2.0)
+BuildRequires:	pkgconfig(libpanelapplet-4.0)
+BuildRequires:	pkgconfig(libpeas-1.0)
+BuildRequires:	pkgconfig(libxml-2.0)
+#BuildRequires:	pkgconfig(spice-client-gtk-3.0)
+BuildRequires:	pkgconfig(telepathy-glib)
+BuildRequires:	pkgconfig(vte-2.90)
+
 Requires(post):shared-mime-info
 Requires(postun):shared-mime-info
 
@@ -33,89 +40,42 @@ With Vinagre you can have several connections open simultaneously, bookmark
 your servers thanks to the Favorites support, store the passwords in the
 GNOME keyring, and browse the network to look for VNC servers.
 
-
-%package devel
-Summary: VNC Client for the GNOME Desktop - development files
-Group: Development/C
-Requires: %name = %version-%release
-
-%description devel
-Vinagre is a VNC Client for the GNOME Desktop.
-
-Install this package if you want to build plugins for %name.
-
 %prep
 %setup -q
+%apply_patches
 
 %build
-%configure2_5x --enable-avahi --enable-telepathy --enable-ssh --disable-static
+%configure2_5x \
+	--enable-ssh
+
 %make
 
 %install
-rm -rf %{buildroot} %name.lang
+rm -rf %{buildroot} %{name}.lang
 %makeinstall_std
-%find_lang %name --with-gnome
-for omf in %buildroot%_datadir/omf/*/*-??*.omf;do
-echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed s!%buildroot!!)" >> %name.lang
-done
+%find_lang %{name} --with-gnome
 
 desktop-file-install --vendor="" \
-  --add-category="RemoteAccess" \
-  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*
+	--add-category="RemoteAccess" \
+	--dir %{buildroot}%{_datadir}/applications \
+	%{buildroot}%{_datadir}/applications/*
 
-rm -f %buildroot%_libdir/%name-1/plugin*/*.la
+rm -f %{buildroot}%{_libdir}/%{name}-%{api}/plugin*/*.la
 
-%if %mdkversion < 200900
-%post
-%update_menus
-%update_desktop_database
-%update_mime_database
-%update_icon_cache hicolor
-%post_install_gconf_schemas vinagre
-%endif
-
-%preun
-%preun_uninstall_gconf_schemas vinagre
-
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%clean_desktop_database
-%clean_mime_database
-%clean_icon_cache hicolor
-%endif
-
-%clean
-rm -rf %{buildroot}
-
-%files -f %name.lang
-%defattr(-,root,root)
+%files -f %{name}.lang
 %doc AUTHORS NEWS README
-%_sysconfdir/gconf/schemas/vinagre.schemas
-%_bindir/*
-%_datadir/applications/*
-%_datadir/%name
-%dir %_datadir/%name-1/
-%dir %_datadir/%name-1/plugins/
-%_datadir/%name-1/plugins/vnc/
-%dir %_datadir/omf/vinagre
-%_datadir/omf/vinagre/vinagre-C.omf
-%_datadir/icons/hicolor/*/*/*.*
-%_datadir/mime/packages/vinagre-mime.xml
-%_datadir/dbus-1/services/org.freedesktop.Telepathy.Client.Vinagre.service
-%_datadir/telepathy/clients/Vinagre.client
-%_mandir/man1/vinagre.1*
-%_libdir/bonobo/servers/GNOME_VinagreApplet.server
-%_libexecdir/vinagre-applet
-%dir %_libdir/%name-1/
-%dir %_libdir/%name-1/plugin-loaders
-%dir %_libdir/%name-1/plugins/
-%_libdir/%name-1/plugin-loaders/libcloader.so
-%_libdir/%name-1/plugins/*.so
-%_libdir/%name-1/plugins/*.vinagre-plugin
+%{_bindir}/*
+%{_datadir}/applications/*
+%{_datadir}/%{name}
+%dir %{_libdir}/%{name}-%{api}/
+%dir %{_libdir}/%{name}-%{api}/plugins/
+%{_libdir}/%{name}-%{api}/plugins/*.so
+#{_libdir}/%{name}-%{api}/plugins/vnc/
+%{_datadir}/dbus-1/services/org.freedesktop.Telepathy.Client.Vinagre.service
+%{_datadir}/GConf/gsettings/org.gnome.Vinagre.convert
+%{_datadir}/glib-2.0/schemas/org.gnome.Vinagre.gschema.xml
+%{_datadir}/icons/hicolor/*/*/*.*
+%{_datadir}/mime/packages/vinagre-mime.xml
+%{_datadir}/telepathy/clients/Vinagre.client
+%{_mandir}/man1/vinagre.1*
 
-%files devel
-%defattr(-,root,root)
-%doc ChangeLog
-%_includedir/%name-1.0
-%_libdir/pkgconfig/%name-1.0.pc
