@@ -2,9 +2,9 @@
 
 Summary:	VNC Client for the GNOME Desktop
 Name:		vinagre
-Version:	3.4.1
+Version:	3.6.2
 Release:	1
-Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
+Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 License:	GPLv2+
 Group:		Networking/Remote access
 Url:		http://www.gnome.org/projects/vinagre/index.html
@@ -23,10 +23,12 @@ BuildRequires:	pkgconfig(gnome-keyring-1)
 BuildRequires:	pkgconfig(libpeas-1.0) >= 0.7.2
 BuildRequires:	pkgconfig(gtk-vnc-2.0) >= 0.4.3
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
+BuildRequires:	pkgconfig(libsecret-1)
 BuildRequires:	gnome-doc-utils >= 0.3.2
 BuildRequires:	intltool
 BuildRequires:	desktop-file-utils
 BuildRequires:	itstool
+BuildRequires:	libxml2-utils
 
 Requires:	gnome-icon-theme >= 2.30
 
@@ -65,6 +67,3 @@ desktop-file-install --vendor="" \
 %{_mandir}/man1/vinagre.1*
 %{_datadir}/glib-2.0/schemas/org.gnome.Vinagre.gschema.xml
 %{_datadir}/GConf/gsettings/org.gnome.Vinagre.convert
-
-%{_datadir}/help/*/%{name}/*.page
-%{_datadir}/help/*/%{name}/figures/*.png
