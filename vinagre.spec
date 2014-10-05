@@ -2,12 +2,13 @@
 
 Summary:	VNC Client for the GNOME Desktop
 Name:		vinagre
-Version:	3.6.2
-Release:	7
+Version:	3.14.0
+Release:	1
 License:	GPLv2+
 Group:		Networking/Remote access
 Url:		http://www.gnome.org/projects/vinagre/index.html
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
+Patch0:		format-string-vinagre-3.14.0.patch
 
 BuildRequires:	desktop-file-utils
 BuildRequires:	gnome-common
@@ -42,9 +43,10 @@ GNOME keyring, and browse the network to look for VNC servers.
 
 %prep
 %setup -q
+%apply_patches
 
 %build
-%configure2_5x --enable-ssh
+%configure --enable-ssh
 %make
 
 %install
@@ -63,6 +65,7 @@ desktop-file-install --vendor="" \
 %{_datadir}/applications/*
 %{_datadir}/%{name}
 %{_datadir}/icons/hicolor/*/*/*.*
+%{_datadir}/appdata/%{name}.appdata.xml
 %{_datadir}/dbus-1/services/org.freedesktop.Telepathy.Client.Vinagre.service
 %{_datadir}/GConf/gsettings/org.gnome.Vinagre.convert
 %{_datadir}/glib-2.0/schemas/org.gnome.Vinagre.gschema.xml
