@@ -2,7 +2,7 @@
 
 Summary:	VNC Client for the GNOME Desktop
 Name:		vinagre
-Version:	3.14.0
+Version:	3.14.1
 Release:	1
 License:	GPLv2+
 Group:		Networking/Remote access
@@ -25,12 +25,11 @@ BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(gtk+-3.0) >= 3.0.3
 BuildRequires:	pkgconfig(gtk-vnc-2.0) >= 0.4.3
 BuildRequires:	pkgconfig(libpeas-1.0) >= 0.7.2
-BuildRequires:	pkgconfig(libpanelapplet-4.0) >= 2.91.91
 BuildRequires:	pkgconfig(libsecret-1)
 BuildRequires:	pkgconfig(libxml-2.0) >= 2.6.31
 BuildRequires:	pkgconfig(spice-client-gtk-3.0) >= 0.5
 BuildRequires:	pkgconfig(telepathy-glib) >= 0.11.6
-BuildRequires:	pkgconfig(vte-2.90) >= 0.20
+BuildRequires:	pkgconfig(vte-2.91) >= 0.20
 
 Requires:	gnome-icon-theme >= 2.30
 
