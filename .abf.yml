@@ -1,4 +1,5 @@
 removed_sources:
   vinagre-3.14.0.tar.xz: 18b709aa24927052134ca30490ea64af7c48b787
-sources:
   vinagre-3.14.1.tar.xz: f9b4282a4be3e667de18f5129d2a524be7cd4a90
+sources:
+  vinagre-3.16.0.tar.xz: 20bfda0abe6897e122dbfe73bb265f52d6df84a1
