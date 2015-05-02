@@ -45,7 +45,7 @@ GNOME keyring, and browse the network to look for VNC servers.
 %apply_patches
 
 %build
-%configure --enable-ssh
+%configure --enable-ssh --enable-compile-warnings=no
 %make
 
 %install
