@@ -4,7 +4,7 @@
 Summary:	VNC Client for the GNOME Desktop
 Name:		vinagre
 Version:	3.18.2
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Networking/Remote access
 Url:		http://www.gnome.org/projects/vinagre/index.html
