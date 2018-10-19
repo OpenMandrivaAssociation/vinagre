@@ -9,7 +9,7 @@ License:	GPLv2+
 Group:		Networking/Remote access
 Url:		http://www.gnome.org/projects/vinagre/index.html
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
-Patch0:		format-string-vinagre-3.14.0.patch
+#Patch0:		format-string-vinagre-3.14.0.patch
 
 BuildRequires:	desktop-file-utils
 BuildRequires:	gnome-common
