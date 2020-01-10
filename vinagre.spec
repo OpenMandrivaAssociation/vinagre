@@ -43,7 +43,7 @@ GNOME keyring, and browse the network to look for VNC servers.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 %build
 %configure --enable-ssh --enable-compile-warnings=no
