@@ -1,6 +1,9 @@
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
 %define _disable_rebuild_configure 1
 
+# Workaround duplicate symbols
+%global optflags %{optflags} -fcommon
+
 Summary:	VNC Client for the GNOME Desktop
 Name:		vinagre
 Version:	3.22.0
