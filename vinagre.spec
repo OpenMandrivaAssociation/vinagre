@@ -4,7 +4,7 @@
 Summary:	VNC Client for the GNOME Desktop
 Name:		vinagre
 Version:	3.22.0
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		Networking/Remote access
 Url:		http://www.gnome.org/projects/vinagre/index.html
@@ -18,7 +18,8 @@ BuildRequires:	itstool
 BuildRequires:	libxml2-utils
 BuildRequires:	pkgconfig(avahi-ui-gtk3) >= 0.6.26
 BuildRequires:	pkgconfig(avahi-gobject) >= 0.6.26
-BuildRequires:	pkgconfig(avahi-ui)
+BuildRequires:	pkgconfig(avahi-core)
+BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(glib-2.0) >= 2.25.11
 BuildRequires:	pkgconfig(gnome-keyring-1)
 BuildRequires:	pkgconfig(gnome-doc-utils)
@@ -47,10 +48,10 @@ GNOME keyring, and browse the network to look for VNC servers.
 
 %build
 %configure --enable-ssh --enable-compile-warnings=no
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 %find_lang %{name} --with-gnome
 
