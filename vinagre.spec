@@ -14,6 +14,11 @@ Url:		https://www.gnome.org/projects/vinagre/index.html
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 #Patch0:		format-string-vinagre-3.14.0.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	desktop-file-utils
 BuildRequires:	gnome-common
 BuildRequires:	intltool
