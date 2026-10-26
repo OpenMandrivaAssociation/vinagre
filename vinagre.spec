@@ -2,7 +2,7 @@
 %define _disable_rebuild_configure 1
 
 # Workaround duplicate symbols
-%global optflags %{optflags} -fcommon
+%global optflags %{optflags} -fcommon -std=gnu17 -Wno-implicit-int -Wno-incompatible-function-pointer-types -Wno-incompatible-pointer-types
 
 Summary:	VNC Client for the GNOME Desktop
 Name:		vinagre
